@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { Error } from './Error';
+import PropTypes from 'prop-types';
+
 export const Pregunta = ({ guardarPresupuesto, guardarRestante, mostrarPregunta }) => {
 
     const [cantidad, setCantidad] = useState(0);
@@ -45,4 +47,11 @@ export const Pregunta = ({ guardarPresupuesto, guardarRestante, mostrarPregunta 
             </form>
         </>
     )
+}
+
+Pregunta.propTypes = {
+    guardarPresupuesto: PropTypes.func.isRequired,
+    guardarRestante: PropTypes.func.isRequired,
+    mostrarPregunta: PropTypes.func.isRequired
+    
 }

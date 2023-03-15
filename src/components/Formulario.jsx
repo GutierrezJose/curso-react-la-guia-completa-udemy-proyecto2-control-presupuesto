@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
 import {Error} from './Error';
 import shortid from 'shortid';
-export const Formulario = ({agregarNuevoGasto}) => {
+import PropTypes from 'prop-types';
+
+export const Formulario = ({guardarGasto, guardarCrearGasto }) => {
 
     const [nombreGasto, setNombreGasto] = useState('');
     const [cantidadGasto, setCantidadGasto] = useState(0);
@@ -22,7 +24,8 @@ export const Formulario = ({agregarNuevoGasto}) => {
             id: shortid.generate()
         }
         //pasar el gasto al componente principal
-        agregarNuevoGasto(gasto);
+        guardarGasto(gasto);
+        guardarCrearGasto(true);
 
         //resetear el form
         setNombreGasto('');
@@ -33,7 +36,7 @@ export const Formulario = ({agregarNuevoGasto}) => {
     return (
         <form onSubmit={agregarGasto}>
             <h2>Agrega tus gastos aqui</h2>
-            {error ? <Error mensaje='Ambos campos son obligaorios o Presuipuesto incorrecto'/> : null}
+            {error ? <Error mensaje='Ambos campos son obligatorios o Presupuesto incorrecto'/> : null}
             <div className='campo'>
                 <label>Nombre Gasto</label>
                 <input
@@ -62,4 +65,9 @@ export const Formulario = ({agregarNuevoGasto}) => {
             />
         </form>
     )
+}
+
+Formulario.propTypes = {
+    guardarGasto: PropTypes.func.isRequired,
+    guardarCrearGasto: PropTypes.func.isRequired
 }
